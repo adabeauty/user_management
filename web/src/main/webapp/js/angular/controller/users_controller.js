@@ -8,7 +8,7 @@
  * Controller of the partyBidApp
  */
 angular.module('userManagement')
-    .controller('UsersController', function ($scope, $location, $resource,$http) {
+    .controller('UsersController', function ($scope, $location, $resource, $http) {
 
         log_out_nav_bar();
 
