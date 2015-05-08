@@ -1,5 +1,7 @@
 package com.tw.core;
 
+import org.springframework.context.annotation.Scope;
+
 import javax.persistence.*;
 
 /**
@@ -7,6 +9,7 @@ import javax.persistence.*;
  */
 
 @Entity
+@Scope("session")
 @Table(name = "ADMINISTRATOR")
 public class Admin {
 

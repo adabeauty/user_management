@@ -22,13 +22,14 @@ public class AdminService {
     }
 
     @Transactional
-    public Boolean findOne(Admin admin){
+    public List<Admin> findOne(Admin admin){
 
-        List<Admin> adminTemp = adminDao.findOne(admin);
-        if(adminTemp.size() == 0){
-            return false;
-        }else{
-            return true;
-        }
+//        List<Admin> adminTemp = adminDao.findOne(admin);
+//        if(adminTemp.size() == 0){
+//            return false;
+//        }else{
+//            return true;
+//        }
+        return adminDao.findOne(admin);
     }
 }
