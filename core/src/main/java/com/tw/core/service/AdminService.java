@@ -21,12 +21,6 @@ public class AdminService {
         this.adminDao = adminDao;
     }
 
-//    @Transactional
-//    public List<Admin> findOne(Admin admin){
-//
-//        return adminDao.findOne(admin);
-//    }
-
     @Transactional
     public List<Admin> findOne(Admin admin){
 

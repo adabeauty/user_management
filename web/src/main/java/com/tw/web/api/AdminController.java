@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @Scope("session")
-@RequestMapping("/api/admins")
+@RequestMapping("/api/session")
 public class AdminController {
 
     private AdminService adminService;
@@ -31,12 +31,14 @@ public class AdminController {
     @RequestMapping(method = RequestMethod.POST)
     public String findOne(@RequestBody Admin admin, HttpServletRequest request){
 
-        Object session  = request.getSession().getAttribute(admin.getName());
+        Object session  = request.getSession().getAttribute("admin");
+
         List<Admin> admins = adminService.findOne(admin);
 
         if(admins.size() != 0){
             if(session == null){
-                request.getSession().setAttribute(admin.getName(), admins.get(0));
+                request.getSession().setAttribute("admin", admins.get(0));
+
                 return "登录成功";
             }else{
                 return "用户已登录";
@@ -44,5 +46,22 @@ public class AdminController {
         }else{
             return "用户名或密码错误";
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public Admin isLogIn(HttpServletRequest request){
+
+        Object session  = request.getSession().getAttribute("admin");
+        if(session != null){
+            return (Admin) session;
+        }else {
+            return null;
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void clearSession(HttpServletRequest request){
+//        request.getSession().setAttribute("admin", null);
+        request.getSession().removeAttribute("admin");
     }
 }

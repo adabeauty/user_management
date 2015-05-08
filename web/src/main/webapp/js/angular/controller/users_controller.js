@@ -10,6 +10,34 @@
 angular.module('userManagement')
     .controller('UsersController', function ($scope, $location, $resource,$http) {
 
+        log_out_nav_bar();
+
+        is_log_in();
+
+        function is_log_in(){
+
+            $http.get('/web/api/session').success(function(result){
+
+                if(result){
+                    $scope.Admin.name = result.name;
+                    $scope.logIn = true;
+                    $scope.logOut = false;
+                }
+            });
+        }
+
+        $scope.log_out = function(){
+            $http.delete('/web/api/session').success(function(result){
+                log_out_nav_bar();
+            });
+        };
+
+        function log_out_nav_bar(){
+            $scope.Admin = {};
+            $scope.logIn = false;
+            $scope.logOut = true;
+        }
+
         var User = $resource("/web/api/v1/users/:userId");
         $scope.users = User.query();
 
@@ -48,7 +76,7 @@ angular.module('userManagement')
             _($scope.users).each(function (user) {
                 user.selected = $scope.selectedAll;
             });
-        }
+        };
 
         $scope.go_to_create_user = function(){
             $location.path("/new");
