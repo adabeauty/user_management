@@ -29,14 +29,20 @@ public class AdminController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Boolean findOne(@RequestBody Admin admin, HttpServletRequest request){
+    public String findOne(@RequestBody Admin admin, HttpServletRequest request){
 
+        Object session  = request.getSession().getAttribute(admin.getName());
         List<Admin> admins = adminService.findOne(admin);
+
         if(admins.size() != 0){
-            request.getSession().setAttribute("admin", admins.get(0));
-            return true;
+            if(session == null){
+                request.getSession().setAttribute(admin.getName(), admins.get(0));
+                return "登录成功";
+            }else{
+                return "用户已登录";
+            }
         }else{
-            return false;
+            return "用户名或密码错误";
         }
     }
 }
