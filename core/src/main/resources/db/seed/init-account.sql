@@ -1,0 +1,1 @@
+insert into account (NAME, PASSWORD) values ('ada', '123456');
