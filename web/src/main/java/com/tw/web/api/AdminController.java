@@ -34,8 +34,6 @@ public class AdminController {
         List<Admin> admins = adminService.findOne(admin);
         if(admins.size() != 0){
             request.getSession().setAttribute("admin", admins.get(0));
-
-//            return request.getSession().getAttribute("admin");
             return true;
         }else{
             return false;

@@ -14,16 +14,4 @@ angular.module('userManagement')
                 console.log(data);
             });
         };
-
-        //
-        //var Admin = $resource("/web/api/admins/");
-        //$scope.user = {};
-        //$scope.create = function(){
-        //
-        //    var localAdmin = new Admin($scope.administrator);
-        //    localAdmin.$save().then(function(data){
-        //        console.log(data);
-        //    });
-        //
-        //}
     });
