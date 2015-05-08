@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by hgwang on 5/7/15.
@@ -21,7 +22,8 @@ public class AdminDao {
         this.sessionFactory = sessionFactory;
     }
 
-    public Admin findOne(Admin admin){
-        return (Admin) sessionFactory.getCurrentSession().get(Admin.class, admin.getName());
+    public List<Admin> findOne(Admin admin){
+
+        return  sessionFactory.getCurrentSession().createQuery("from Admin Administrator where Administrator.name='" + admin.getName() + "' and Administrator.password='" + admin.getPassword() + "'").list();
     }
 }

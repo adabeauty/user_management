@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by hgwang on 5/7/15.
@@ -23,8 +24,8 @@ public class AdminService {
     @Transactional
     public Boolean findOne(Admin admin){
 
-        Admin adminTemp = adminDao.findOne(admin);
-        if(adminTemp == null){
+        List<Admin> adminTemp = adminDao.findOne(admin);
+        if(adminTemp.size() == 0){
             return false;
         }else{
             return true;

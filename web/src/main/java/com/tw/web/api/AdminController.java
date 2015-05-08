@@ -21,14 +21,7 @@ public class AdminController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public boolean findOne(@RequestBody Admin admin){
-        System.out.println(admin);
-
+    public Boolean findOne(@RequestBody Admin admin){
         return adminService.findOne(admin);
-    }
-
-    @RequestMapping(method = RequestMethod.GET)
-    public String  sayHello(){
-        return "hello";
     }
 }

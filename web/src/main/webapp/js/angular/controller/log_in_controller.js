@@ -9,8 +9,21 @@ angular.module('userManagement')
         };
 
         $scope.logIn = function(){
-            $http.post('/web/api/admins', {'admin': $scope.administrator}).success(function(data){
+            $http.post('/web/api/admins', {name: $scope.administrator.name, password:$scope.administrator.password}).success(function(data){
+
                 console.log(data);
             });
-        }
+        };
+
+        //
+        //var Admin = $resource("/web/api/admins/");
+        //$scope.user = {};
+        //$scope.create = function(){
+        //
+        //    var localAdmin = new Admin($scope.administrator);
+        //    localAdmin.$save().then(function(data){
+        //        console.log(data);
+        //    });
+        //
+        //}
     });
