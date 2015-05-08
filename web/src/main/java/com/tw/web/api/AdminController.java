@@ -31,13 +31,13 @@ public class AdminController {
     @RequestMapping(method = RequestMethod.POST)
     public String findOne(@RequestBody Admin admin, HttpServletRequest request){
 
-        Object session  = request.getSession().getAttribute("admin");
+        Object session  = request.getSession().getAttribute("current_user");
 
         List<Admin> admins = adminService.findOne(admin);
 
         if(admins.size() != 0){
             if(session == null){
-                request.getSession().setAttribute("admin", admins.get(0));
+                request.getSession().setAttribute("current_user", admins.get(0));
 
                 return "登录成功";
             }else{
@@ -51,7 +51,7 @@ public class AdminController {
     @RequestMapping(method = RequestMethod.GET)
     public Admin isLogIn(HttpServletRequest request){
 
-        Object session  = request.getSession().getAttribute("admin");
+        Object session  = request.getSession().getAttribute("current_user");
         if(session != null){
             return (Admin) session;
         }else {
@@ -61,7 +61,6 @@ public class AdminController {
 
     @RequestMapping(method = RequestMethod.DELETE)
     public void clearSession(HttpServletRequest request){
-//        request.getSession().setAttribute("admin", null);
-        request.getSession().removeAttribute("admin");
+        request.getSession().removeAttribute("current_user");
     }
 }
