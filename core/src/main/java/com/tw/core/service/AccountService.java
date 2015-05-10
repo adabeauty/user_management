@@ -1,7 +1,7 @@
 package com.tw.core.service;
 
-import com.tw.core.Admin;
-import com.tw.core.dao.AdminDao;
+import com.tw.core.Account;
+import com.tw.core.dao.AccountDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +13,17 @@ import java.util.List;
  */
 
 @Service
-public class AdminService {
-    private AdminDao adminDao;
+public class AccountService {
+    private AccountDao accountDao;
 
     @Autowired
-    AdminService(AdminDao adminDao){
-        this.adminDao = adminDao;
+    AccountService(AccountDao accountDao){
+        this.accountDao = accountDao;
     }
 
     @Transactional
-    public List<Admin> findOne(Admin admin){
+    public List<Account> findOne(Account account){
 
-        return adminDao.findOne(admin);
+        return accountDao.findOne(account);
     }
 }

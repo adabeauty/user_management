@@ -1,7 +1,7 @@
 package com.tw.web.api;
 
-import com.tw.core.Admin;
-import com.tw.core.service.AdminService;
+import com.tw.core.Account;
+import com.tw.core.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,21 +19,21 @@ import java.util.List;
 @RestController
 @Scope("session")
 @RequestMapping("/api/session")
-public class AdminController {
+public class AccountController {
 
-    private AdminService adminService;
+    private AccountService accountService;
 
     @Autowired
-    AdminController(AdminService adminService){
-        this.adminService = adminService;
+    AccountController(AccountService adminService){
+        this.accountService = adminService;
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String findOne(@RequestBody Admin admin, HttpServletRequest request){
+    public String findOne(@RequestBody Account admin, HttpServletRequest request){
 
         Object session  = request.getSession().getAttribute("current_user");
 
-        List<Admin> admins = adminService.findOne(admin);
+        List<Account> admins = accountService.findOne(admin);
 
         if(admins.size() != 0){
             if(session == null){
@@ -49,11 +49,11 @@ public class AdminController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Admin isLogIn(HttpServletRequest request){
+    public Account isLogIn(HttpServletRequest request){
 
         Object session  = request.getSession().getAttribute("current_user");
         if(session != null){
-            return (Admin) session;
+            return (Account) session;
         }else {
             return null;
         }

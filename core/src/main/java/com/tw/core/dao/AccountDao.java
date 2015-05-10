@@ -1,6 +1,6 @@
 package com.tw.core.dao;
 
-import com.tw.core.Admin;
+import com.tw.core.Account;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,17 +13,18 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class AdminDao {
+public class AccountDao {
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    AdminDao(SessionFactory sessionFactory){
+    AccountDao(SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
     }
 
-    public List<Admin> findOne(Admin admin){
+    public List<Account> findOne(Account account){
 
-        return  sessionFactory.getCurrentSession().createQuery("from Admin Administrator where Administrator.name='" + admin.getName() + "' and Administrator.password='" + admin.getPassword() + "'").list();
+        return  sessionFactory.getCurrentSession().createQuery("from Account Account where Account.name='" + account.getName() + "' and Account.password='" + account.getPassword() + "'").list();
+
     }
 }

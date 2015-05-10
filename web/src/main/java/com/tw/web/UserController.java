@@ -22,6 +22,12 @@ public class UserController {
         this.userService = userService;
     }
 
+
+//    private List<String> getUrls(){
+//
+//        return null;
+//    }
+
     @RequestMapping("/all")
     public List<User> listUser() {
         return userService.listUser();

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Scope("session")
 @Table(name = "ADMINISTRATOR")
-public class Admin {
+public class Account {
 
     @Id
     @Column(name = "ID")
