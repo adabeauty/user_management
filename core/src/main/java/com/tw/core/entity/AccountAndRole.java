@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="account_role")
-public class AccountRole {
+public class AccountAndRole {
 
     @Id
     @Column(name="ID")
