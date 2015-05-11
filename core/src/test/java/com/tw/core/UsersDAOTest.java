@@ -106,7 +106,7 @@ public class UsersDAOTest {
     @Test
     public void should_delete_all_users() {
         List<User> users = usersDAO.findAll();
-        long[] ids = new long[6];
+        int[] ids = new int[6];
         for (int index = 0; index < users.size(); index++) {
             ids[index] = users.get(index).getId();
         }

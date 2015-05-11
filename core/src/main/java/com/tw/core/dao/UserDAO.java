@@ -31,7 +31,7 @@ public class UserDAO {
         sessionFactory.getCurrentSession().save(user);
     }
 
-    public User findUserById(long id) {
+    public User findUserById(int id) {
         User user = (User) sessionFactory.getCurrentSession().get(User.class, id);
         return user;
     }
@@ -40,14 +40,14 @@ public class UserDAO {
         sessionFactory.getCurrentSession().update(user);
     }
 
-    public void deleteUser(long id) {
+    public void deleteUser(int id) {
         User user = findUserById(id);
         if (user != null) {
             sessionFactory.getCurrentSession().delete(user);
         }
     }
 
-    public void deleteUserList(long[] ids) {
+    public void deleteUserList(int[] ids) {
         for (int index = 0; index < ids.length; index++) {
             deleteUser(ids[index]);
         }

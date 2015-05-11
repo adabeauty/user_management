@@ -31,7 +31,7 @@ public class UserService {
     }
 
     @Transactional
-    public User findUserById(long id) {
+    public User findUserById(int id) {
         return userDAO.findUserById(id);
     }
 
@@ -41,12 +41,12 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(long id) {
+    public void deleteUser(int id) {
         userDAO.deleteUser(id);
     }
 
     @Transactional
-    public void deleteUserList(long[] ids) {
+    public void deleteUserList(int[] ids) {
         userDAO.deleteUserList(ids);
     }
 }
