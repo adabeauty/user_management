@@ -71,7 +71,7 @@ public class UsersDAO {
 
 
     public List<Role> getRoles(User user){
-        
+
         return sessionFactory.getCurrentSession().createQuery("from Role as role where role.id " +
                 "in (select relationship.roleId from UserAndRole as relationship where relationship.userId = :userId)").setParameter("userId", user.getId()).list();
     }
