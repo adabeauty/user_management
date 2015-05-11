@@ -1,5 +1,7 @@
 package com.tw.core.entity;
 
+import org.springframework.context.annotation.Scope;
+
 import javax.persistence.*;
 
 /**
@@ -7,6 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "USER")
+@Scope("session")
 public class User {
     @Id
     @Column(name = "ID")

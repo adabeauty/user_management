@@ -74,5 +74,4 @@ public class UsersController {
     public List<User> search( @RequestParam(value = "keyword") String keyword) {
         return usersService.search(keyword);
     }
-
 }

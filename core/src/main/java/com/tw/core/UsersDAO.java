@@ -1,5 +1,6 @@
 package com.tw.core;
 
+import com.tw.core.entity.Account;
 import com.tw.core.entity.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,10 @@ public class UsersDAO {
         return sessionFactory.getCurrentSession().createQuery(query)
                 .setString("keyword", "%" + keyword + "%")
                 .list();
+    }
+
+    public List<User> logIn(User user){
+
+        return  sessionFactory.getCurrentSession().createQuery("from User user where user.name='" + user.getName() + "' and user.password='" + user.getPassword() + "'").list();
     }
 }

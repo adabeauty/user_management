@@ -53,4 +53,10 @@ public class UsersService {
     public List<User> search(String keyword) {
         return usersDAO.search(keyword);
     }
+
+    @Transactional
+    public List<User> logIn(User user){
+
+        return usersDAO.logIn(user);
+    }
 }

@@ -1,7 +1,7 @@
 package com.tw.web.api;
 
-import com.tw.core.entity.Account;
-import com.tw.core.service.AccountService;
+import com.tw.core.UsersService;
+import com.tw.core.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,25 +19,26 @@ import java.util.List;
 @RestController
 @Scope("session")
 @RequestMapping("/api/session")
-public class AccountController {
+public class LogController {
 
-    private AccountService accountService;
+    private UsersService usersService ;
 
     @Autowired
-    AccountController(AccountService adminService){
-        this.accountService = adminService;
+    LogController(UsersService usersService){
+        this.usersService = usersService;
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String findOne(@RequestBody Account admin, HttpServletRequest request){
+    public String findOne(@RequestBody User user, HttpServletRequest request){
 
         Object session  = request.getSession().getAttribute("current_user");
 
-        List<Account> admins = accountService.findOne(admin);
+        List<User> users = usersService.logIn(user);
 
-        if(admins.size() != 0){
-            if(session == null){
-                request.getSession().setAttribute("current_user", admins.get(0));
+
+        if(users.size() != 0){
+            if(session == null) {
+                request.getSession().setAttribute("current_user", users.get(0));
 
                 return "登录成功";
             }else{
@@ -49,11 +50,11 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Account isLogIn(HttpServletRequest request){
+    public User isLogIn(HttpServletRequest request){
 
         Object session  = request.getSession().getAttribute("current_user");
         if(session != null){
-            return (Account) session;
+            return (User) session;
         }else {
             return null;
         }
