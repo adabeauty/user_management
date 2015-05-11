@@ -28,6 +28,10 @@ angular
                 templateUrl: 'views/role.html',
                 controller: 'roleController'
             })
+            .when('/resource', {
+                templateUrl: 'views/resource.html',
+                controller: 'resourcesController'
+            })
             .when('/logIn', {
                 templateUrl: 'views/logIn.html',
                 controller: 'logInController'
