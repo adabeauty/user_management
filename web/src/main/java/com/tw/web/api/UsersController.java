@@ -33,7 +33,7 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public ResponseEntity<User> findOne(@PathVariable("userId") long id) {
+    public ResponseEntity<User> findOne(@PathVariable("userId") int id) {
         User user = usersService.findOne(id);
 
         if (user == null) {
@@ -53,20 +53,20 @@ public class UsersController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("userId") long id, @RequestBody User user) {
+    public void update(@PathVariable("userId") int id, @RequestBody User user) {
         usersService.update(user);
     }
 
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("userId") long id) {
+    public void delete(@PathVariable("userId") int id) {
         usersService.delete(id);
     }
 
     @RequestMapping(value = "/:batch", method = RequestMethod.DELETE )
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAll(@RequestBody long[] ids) {
+    public void deleteAll(@RequestBody int[] ids) {
         usersService.deleteAll(ids);
     }
 

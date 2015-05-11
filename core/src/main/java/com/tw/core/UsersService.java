@@ -1,5 +1,7 @@
 package com.tw.core;
 
+import com.tw.core.entity.Role;
+import com.tw.core.entity.Url;
 import com.tw.core.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,7 @@ public class UsersService {
     }
 
     @Transactional
-    public User findOne(long id) {
+    public User findOne(int id) {
         return usersDAO.findOne(id);
     }
 
@@ -35,7 +37,7 @@ public class UsersService {
     }
 
     @Transactional
-    public void delete(long id) {
+    public void delete(int id) {
         usersDAO.delete(id);
     }
 
@@ -45,7 +47,7 @@ public class UsersService {
     }
 
     @Transactional
-    public void deleteAll(long[] idList) {
+    public void deleteAll(int[] idList) {
         usersDAO.deleteAll(idList);
     }
 
@@ -56,13 +58,17 @@ public class UsersService {
 
     @Transactional
     public List<User> logIn(User user){
-
         return usersDAO.logIn(user);
     }
 
     @Transactional
-    public void setUrlsAndRoles(User user){
-        usersDAO.setRoles(user);
-        usersDAO.setUrls(user);
+    public List<Role> getRoles(User user){
+        return usersDAO.getRoles(user);
+    }
+
+    @Transactional
+    public List<Url> getUrls(User user){
+        System.out.println(usersDAO.getUrls(user) + "********");
+        return usersDAO.getUrls(user);
     }
 }

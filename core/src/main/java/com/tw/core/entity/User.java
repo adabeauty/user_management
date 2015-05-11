@@ -3,7 +3,6 @@ package com.tw.core.entity;
 import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by twer on 7/16/14.
@@ -15,7 +14,7 @@ public class User {
     @Id
     @Column(name = "ID")
     @GeneratedValue
-    private long id;
+    private int id;
 
     @Column(name = "NAME")
     private String name;
@@ -29,18 +28,14 @@ public class User {
     @Column(name = "AGE")
     private int age;
 
-    private List<Url> urls;
-
-    private List<Role> roles;
-
     public User() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -74,21 +69,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<Url> getUrls() {
-        return urls;
-    }
-
-    public void setUrls(List<Url> urls) {
-        this.urls = urls;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
     }
 }

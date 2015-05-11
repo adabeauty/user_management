@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hgwang on 5/7/15.
@@ -28,18 +30,27 @@ public class LogController {
         this.usersService = usersService;
     }
 
+    private Map getUser(User user){
+
+        List<User> users = usersService.logIn(user);
+
+        Map userMap = new HashMap();
+        userMap.put("user", users.get(0));
+        userMap.put("urls", usersService.getUrls(users.get(0)));
+
+        return userMap;
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public String findOne(@RequestBody User user, HttpServletRequest request){
 
         Object session  = request.getSession().getAttribute("current_user");
-
         List<User> users = usersService.logIn(user);
-
 
         if(users.size() != 0){
             if(session == null) {
-                request.getSession().setAttribute("current_user", users.get(0));
 
+                request.getSession().setAttribute("current_user", this.getUser(user));
                 return "登录成功";
             }else{
                 return "用户已登录";
@@ -50,11 +61,11 @@ public class LogController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public User isLogIn(HttpServletRequest request){
+    public Map isLogIn(HttpServletRequest request){
 
         Object session  = request.getSession().getAttribute("current_user");
         if(session != null){
-            return (User) session;
+            return (Map) session;
         }else {
             return null;
         }

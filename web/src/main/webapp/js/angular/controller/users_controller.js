@@ -17,9 +17,9 @@ angular.module('userManagement')
         function is_log_in(){
 
             $http.get('/web/api/session').success(function(result){
-
+console.log(result);
                 if(result){
-                    $scope.Admin.name = result.name;
+                    $scope.Admin.name = result.user.name;
                     $scope.logIn = true;
                     $scope.logOut = false;
                 }

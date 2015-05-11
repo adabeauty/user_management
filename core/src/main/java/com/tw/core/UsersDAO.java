@@ -30,7 +30,7 @@ public class UsersDAO {
                 .list();
     }
 
-    public User findOne(long id) {
+    public User findOne(int id) {
         User user = (User) sessionFactory.getCurrentSession().get(User.class, id);
         return user;
     }
@@ -39,7 +39,7 @@ public class UsersDAO {
         sessionFactory.getCurrentSession().save(user);
     }
 
-    public void delete(long id) {
+    public void delete(int id) {
         User user = findOne(id);
         if (user != null) {
             sessionFactory.getCurrentSession().delete(user);
@@ -50,8 +50,8 @@ public class UsersDAO {
         sessionFactory.getCurrentSession().update(user);
     }
 
-    public void deleteAll(long[] idList) {
-        for (long id : idList) {
+    public void deleteAll(int[] idList) {
+        for (int id : idList) {
             delete(id);
         }
     }
@@ -66,31 +66,19 @@ public class UsersDAO {
 
     public List<User> logIn(User user){
 
-        return  sessionFactory.getCurrentSession().createQuery("from User user where user.name='" + user.getName() + "' and user.password='" + user.getPassword() + "'").list();
+        return  sessionFactory.getCurrentSession().createQuery("from User as user where user.name='" + user.getName() + "' and user.password='" + user.getPassword() + "'").list();
     }
 
 
-    public void setRoles(User user){
-        List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole relationship where relationship.userId='" + user.getId() + "'").list();
-        List<Role> roles = sessionFactory.getCurrentSession().createQuery("from Role role where role.id in '" + roleIds + "'").list();
-
-        user.setRoles(roles);
+    public List<Role> getRoles(User user){
+        List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole as relationship where relationship.userId='" + user.getId() + "'").list();
+        return sessionFactory.getCurrentSession().createQuery("from Role as role where role.id in '" + roleIds + "'").list();
     }
 
-    public void setUrls(User user){
+    public List<Url> getUrls(User user){
 
-        List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole relationship where relationship.userId='" + user.getId() + "'").list();
-
-        List<Object> urlIds = sessionFactory.getCurrentSession().createQuery("select relationship.urlId from RoleAndUrl relationship where relationship.roleId in '" + roleIds + "'").list();
-        List<Url> urls = sessionFactory.getCurrentSession().createQuery("from Url url where url.id in '" + urlIds +"'").list();
-
-        user.setUrls(urls);
+        return sessionFactory.getCurrentSession().createQuery("from Url url where url.id " +
+                "in (select relationship.urlId from RoleAndUrl as relationship where relationship.roleId " +
+                "in (select relationship.roleId from UserAndRole as relationship where relationship.userId = :userId))").setParameter("userId", user.getId()).list();
     }
-//    public List<Url> getUrls(User user){
-//
-//        List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole relationship where relationship.userId='" + user.getId() + "'").list();
-//        List<Object> urlIds = sessionFactory.getCurrentSession().createQuery("select relationship.urlId from RoleAndUrl relationship where relationship.roleId in '" + roleIds + "'").list();
-//
-//        return  sessionFactory.getCurrentSession().createQuery("from Url url where url.id in '" + urlIds +"'").list();
-//    }
 }
