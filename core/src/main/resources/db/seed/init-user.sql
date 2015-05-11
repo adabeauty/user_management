@@ -4,3 +4,4 @@ insert into USER ( NAME, PASSWORD, EMAIL, AGE) values ('Red', 'password','red@ab
 insert into USER ( NAME, PASSWORD, EMAIL, AGE) values ('Marry', 'password','marry@abc.com', 19);
 insert into USER ( NAME, PASSWORD, EMAIL, AGE) values ('James', 'password','james@abc.com', 20);
 insert into USER ( NAME, PASSWORD, EMAIL, AGE) values ('Emma', 'password','emma@abc.com', 21);
+insert into USER ( NAME, PASSWORD, EMAIL, AGE) values ('admin', 'password','admin@abc.com', 22);
