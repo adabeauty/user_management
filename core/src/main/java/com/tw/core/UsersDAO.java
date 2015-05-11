@@ -69,11 +69,28 @@ public class UsersDAO {
         return  sessionFactory.getCurrentSession().createQuery("from User user where user.name='" + user.getName() + "' and user.password='" + user.getPassword() + "'").list();
     }
 
-    public List<Url> getUrls(User user){
+
+    public void setRoles(User user){
+        List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole relationship where relationship.userId='" + user.getId() + "'").list();
+        List<Role> roles = sessionFactory.getCurrentSession().createQuery("from Role role where role.id in '" + roleIds + "'").list();
+
+        user.setRoles(roles);
+    }
+
+    public void setUrls(User user){
 
         List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole relationship where relationship.userId='" + user.getId() + "'").list();
-        List<Object> urlIds = sessionFactory.getCurrentSession().createQuery("select relationship.urlId from RoleAndUrl relationship where relationship.roleId in '" + roleIds + "'").list();
 
-        return  sessionFactory.getCurrentSession().createQuery("from Url url where url.id in '" + urlIds +"'").list();
+        List<Object> urlIds = sessionFactory.getCurrentSession().createQuery("select relationship.urlId from RoleAndUrl relationship where relationship.roleId in '" + roleIds + "'").list();
+        List<Url> urls = sessionFactory.getCurrentSession().createQuery("from Url url where url.id in '" + urlIds +"'").list();
+
+        user.setUrls(urls);
     }
+//    public List<Url> getUrls(User user){
+//
+//        List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole relationship where relationship.userId='" + user.getId() + "'").list();
+//        List<Object> urlIds = sessionFactory.getCurrentSession().createQuery("select relationship.urlId from RoleAndUrl relationship where relationship.roleId in '" + roleIds + "'").list();
+//
+//        return  sessionFactory.getCurrentSession().createQuery("from Url url where url.id in '" + urlIds +"'").list();
+//    }
 }

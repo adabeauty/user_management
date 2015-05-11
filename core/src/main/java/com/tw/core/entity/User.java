@@ -3,6 +3,7 @@ package com.tw.core.entity;
 import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by twer on 7/16/14.
@@ -27,6 +28,10 @@ public class User {
 
     @Column(name = "AGE")
     private int age;
+
+    private List<Url> urls;
+
+    private List<Role> roles;
 
     public User() {
     }
@@ -69,5 +74,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Url> getUrls() {
+        return urls;
+    }
+
+    public void setUrls(List<Url> urls) {
+        this.urls = urls;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
