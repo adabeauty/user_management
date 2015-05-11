@@ -68,7 +68,6 @@ public class UsersService {
 
     @Transactional
     public List<Url> getUrls(User user){
-        System.out.println(usersDAO.getUrls(user) + "********");
         return usersDAO.getUrls(user);
     }
 }
