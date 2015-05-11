@@ -81,12 +81,17 @@ angular.module('userManagement')
         };
 
         $scope.go_to_create_user = function(){
+            jumpToNewPage("/new");
+        };
 
-            var canVisit = false;
+        $scope.jump_to_role_page = function(){
+            jumpToNewPage("/resource");
+        };
+
+        function jumpToNewPage(url){
             for(var i=0; i<current_user.urls.length; i++){
-                if(current_user.urls[i].name === '/new'){
-                    $location.path("/new");
-                    canVisit = true;
+                if(current_user.urls[i].name === url){
+                    $location.path(url);
                 }
             }
         }
