@@ -10,17 +10,17 @@ import javax.persistence.*;
 
 @Entity
 @Scope("session")
-@Table(name = "ADMINISTRATOR")
+@Table(name = "account")
 public class Account {
 
     @Id
     @Column(name = "ID")
     private int id;
 
-    @Column(name = "")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "")
+    @Column(name = "PASSWORD")
     private String password;
 
     public long getId() {
