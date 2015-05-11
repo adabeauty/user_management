@@ -24,6 +24,10 @@ angular
                 templateUrl: 'views/new.html',
                 controller: 'UsersNewController'
             })
+            .when('/role', {
+                templateUrl: 'views/role.html',
+                controller: 'roleController'
+            })
             .when('/logIn', {
                 templateUrl: 'views/logIn.html',
                 controller: 'logInController'
