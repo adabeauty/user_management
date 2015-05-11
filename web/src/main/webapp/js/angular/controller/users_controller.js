@@ -81,9 +81,12 @@ angular.module('userManagement')
         };
 
         $scope.go_to_create_user = function(){
+
+            var canVisit = false;
             for(var i=0; i<current_user.urls.length; i++){
                 if(current_user.urls[i].name === '/new'){
                     $location.path("/new");
+                    canVisit = true;
                 }
             }
         }
