@@ -1,5 +1,6 @@
 package com.tw.core;
 
+import com.tw.core.entity.Url;
 import com.tw.core.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,5 +59,10 @@ public class UsersService {
     public List<User> logIn(User user){
 
         return usersDAO.logIn(user);
+    }
+
+    @Transactional
+    public List<Url> getUrls(User user){
+        return usersDAO.getUrls(user);
     }
 }

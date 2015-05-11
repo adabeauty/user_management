@@ -1,6 +1,8 @@
 package com.tw.core;
 
-import com.tw.core.entity.Account;
+import com.sun.webkit.network.URLs;
+import com.tw.core.entity.Role;
+import com.tw.core.entity.Url;
 import com.tw.core.entity.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +67,13 @@ public class UsersDAO {
     public List<User> logIn(User user){
 
         return  sessionFactory.getCurrentSession().createQuery("from User user where user.name='" + user.getName() + "' and user.password='" + user.getPassword() + "'").list();
+    }
+
+    public List<Url> getUrls(User user){
+
+        List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole relationship where relationship.userId='" + user.getId() + "'").list();
+        List<Object> urlIds = sessionFactory.getCurrentSession().createQuery("select relationship.urlId from RoleAndUrl relationship where relationship.roleId in '" + roleIds + "'").list();
+
+        return  sessionFactory.getCurrentSession().createQuery("from Url url where url.id in '" + urlIds +"'").list();
     }
 }

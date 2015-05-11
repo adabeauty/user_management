@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="account_role")
-public class AccountAndRole {
+public class UserAndRole {
 
     @Id
     @Column(name="ID")
@@ -18,8 +18,8 @@ public class AccountAndRole {
     @Column(name="ROLE_ID")
     private int roleId;
 
-    @Column(name="ACCOUNT_ID")
-    private int accountId;
+    @Column(name="USER_ID")
+    private int userId;
 
     public int getId() {
         return id;
@@ -37,11 +37,11 @@ public class AccountAndRole {
         this.roleId = roleId;
     }
 
-    public int getAccountId() {
-        return accountId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
