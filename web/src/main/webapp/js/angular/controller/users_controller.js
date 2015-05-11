@@ -10,6 +10,8 @@
 angular.module('userManagement')
     .controller('UsersController', function ($scope, $location, $resource, $http) {
 
+        var current_user;
+
         log_out_nav_bar();
 
         is_log_in();
@@ -17,6 +19,7 @@ angular.module('userManagement')
         function is_log_in(){
 
             $http.get('/web/api/session').success(function(result){
+                current_user = result;
                 if(result){
                     $scope.Admin.name = result.user.name;
                     $scope.logIn = true;
@@ -62,7 +65,7 @@ angular.module('userManagement')
             $scope.users =_($scope.users).reject(function(user){
                 return user.id == userId;
             });
-        };
+        }
 
         $scope.selectedAll = false;
 
@@ -78,7 +81,11 @@ angular.module('userManagement')
         };
 
         $scope.go_to_create_user = function(){
-            $location.path("/new");
-        }
 
+            for(var i=0; i<current_user.urls.length; i++){
+                if(current_user.urls[i] === 'new'){
+                    $location.path("/new");
+                }
+            }
+        }
     });
