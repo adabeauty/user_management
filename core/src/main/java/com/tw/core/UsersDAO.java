@@ -71,8 +71,9 @@ public class UsersDAO {
 
 
     public List<Role> getRoles(User user){
-        List<Object> roleIds = sessionFactory.getCurrentSession().createQuery("select relationship.roleId from UserAndRole as relationship where relationship.userId='" + user.getId() + "'").list();
-        return sessionFactory.getCurrentSession().createQuery("from Role as role where role.id in '" + roleIds + "'").list();
+        
+        return sessionFactory.getCurrentSession().createQuery("from Role as role where role.id " +
+                "in (select relationship.roleId from UserAndRole as relationship where relationship.userId = :userId)").setParameter("userId", user.getId()).list();
     }
 
     public List<Url> getUrls(User user){
