@@ -1,14 +1,14 @@
-package com.tw.core;
+package com.tw.core.entity;
 
 import javax.persistence.*;
 
 /**
- * Created by hgwang on 5/10/15.
+ * Created by hgwang on 5/11/15.
  */
 
 @Entity
-@Table(name="role")
-public class Role {
+@Table(name="url")
+public class Url {
 
     @Id
     @Column(name="ID")

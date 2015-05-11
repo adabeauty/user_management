@@ -1,6 +1,6 @@
 package com.tw.integration;
 
-import com.tw.core.User;
+import com.tw.core.entity.User;
 import com.tw.core.UsersService;
 import com.tw.core.service.PasswordService;
 import com.tw.web.api.UsersController;

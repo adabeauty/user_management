@@ -1,6 +1,6 @@
 package com.tw.web.api;
 
-import com.tw.core.Account;
+import com.tw.core.entity.Account;
 import com.tw.core.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

@@ -1,4 +1,4 @@
-package com.tw.core;
+package com.tw.core.entity;
 
 import javax.persistence.*;
 

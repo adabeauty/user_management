@@ -1,6 +1,6 @@
 package com.tw.core.service;
 
-import com.tw.core.Account;
+import com.tw.core.entity.Account;
 import com.tw.core.dao.AccountDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

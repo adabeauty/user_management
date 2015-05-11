@@ -3,7 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
-    <class name="com.tw.core.User" table="USER" lazy="true" select-before-update="true">
+    <class name="com.tw.core.entity.User" table="USER" lazy="true" select-before-update="true">
         <id name="id" type="long">
             <column name="ID" />
             <generator class="identity" />

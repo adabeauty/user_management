@@ -1,6 +1,6 @@
 package com.tw.integration;
 
-import com.tw.core.User;
+import com.tw.core.entity.User;
 import com.tw.core.UsersDAO;
 import org.junit.Before;
 import org.junit.Test;

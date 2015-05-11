@@ -1,6 +1,6 @@
 package com.tw.web;
 
-import com.tw.core.User;
+import com.tw.core.entity.User;
 import com.tw.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.tw.core.service;
 
-import com.tw.core.User;
+import com.tw.core.entity.User;
 import com.tw.core.UsersDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;

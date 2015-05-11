@@ -1,6 +1,6 @@
 package com.tw.core.dao;
 
-import com.tw.core.Account;
+import com.tw.core.entity.Account;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

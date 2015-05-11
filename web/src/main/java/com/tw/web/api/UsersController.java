@@ -1,6 +1,6 @@
 package com.tw.web.api;
 
-import com.tw.core.User;
+import com.tw.core.entity.User;
 import com.tw.core.UsersService;
 import com.tw.core.service.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
