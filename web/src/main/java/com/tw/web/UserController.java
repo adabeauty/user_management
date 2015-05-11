@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-    public ModelAndView editUserPage(@PathVariable long id) {
+    public ModelAndView editUserPage(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("userEdit");
         User user = userService.findUserById(id);
         modelAndView.addObject("user", user);
@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-    public ModelAndView editUser(@ModelAttribute User user, @PathVariable long id) {
+    public ModelAndView editUser(@ModelAttribute User user, @PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("userList");
         userService.updateUser(user);
         String message = "User was successfully edited.";
@@ -77,7 +77,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
-    public ModelAndView deleteUser(@PathVariable long id) {
+    public ModelAndView deleteUser(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("userList");
         userService.deleteUser(id);
         String message = "User was successfully deleted.";
@@ -87,7 +87,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteAll/{ids:(?:[0-9]+[,]?)+}", method = RequestMethod.GET)
-    public ModelAndView batchDeleteUser(@PathVariable long[] ids) {
+    public ModelAndView batchDeleteUser(@PathVariable int[] ids) {
         System.out.println("---------------");
         ModelAndView modelAndView = new ModelAndView("userList");
         System.out.println(ids.length);
