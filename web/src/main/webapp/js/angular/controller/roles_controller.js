@@ -18,4 +18,9 @@ angular.module('userManagement')
                 }
             });
         }
+        function log_out_nav_bar(){
+            $scope.Admin = {};
+            $scope.logIn = false;
+            $scope.logOut = true;
+        }
     });
