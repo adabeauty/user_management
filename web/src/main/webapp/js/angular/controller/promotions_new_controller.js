@@ -31,7 +31,7 @@ angular.module('userManagement')
             $scope.logOut = true;
         }
 
-        var Promotion = $resource("/web/api/v1/promotion/");
+        var Promotion = $resource("/web/api/v1/promotions/");
         $scope.promotion = {};
         $scope.create = function(){
 

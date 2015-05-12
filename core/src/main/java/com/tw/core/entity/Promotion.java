@@ -21,6 +21,9 @@ public class Promotion {
     @Column(name="EXPRESSION")
     private String expression;
 
+    public Promotion() {
+    }
+
     public int getId() {
         return id;
     }
