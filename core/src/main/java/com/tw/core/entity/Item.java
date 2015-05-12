@@ -25,7 +25,7 @@ public class Item {
     private String unit;
 
     @Column(name="CREATE_DATE")
-    private String create_data;
+    private String createDate;
 
     @Column(name="BRAND")
     private String brand;
@@ -65,12 +65,12 @@ public class Item {
         this.unit = unit;
     }
 
-    public String getCreate_data() {
-        return create_data;
+    public String getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_data(String create_data) {
-        this.create_data = create_data;
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     public String getBrand() {
