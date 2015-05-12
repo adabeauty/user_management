@@ -85,6 +85,10 @@ angular.module('userManagement')
         };
 
         $scope.jump_to_role_page = function(){
+            jumpToNewPage("/role");
+        };
+
+        $scope.jump_to_resource_page = function(){
             jumpToNewPage("/resource");
         };
 
