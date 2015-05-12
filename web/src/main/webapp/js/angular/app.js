@@ -40,6 +40,10 @@ angular
                 templateUrl: 'views/new_promotion.html',
                 controller: 'promotionNewController'
             })
+            .when('/item', {
+                templateUrl: 'views/item.html',
+                controller: 'itemController'
+            })
             .when('/logIn', {
                 templateUrl: 'views/logIn.html',
                 controller: 'logInController'
