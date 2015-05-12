@@ -6,5 +6,6 @@ CREATE TABLE item(
   UNIT varchar(30) not null,
   CREATE_DATE date not null,
   BRAND varchar(50) not null,
-  CATEGORY varchar(50) not null
+  CATEGORY varchar(50) not null,
+  PRIMARY KEY (ID)
 );
