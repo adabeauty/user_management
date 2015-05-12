@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module("userManagement")
-    .controller("itemController", function($scope, $http){
+    .controller("itemController", function($scope, $http, $resource){
 
         log_out_nav_bar();
         is_log_in();
@@ -23,4 +23,6 @@ angular.module("userManagement")
             $scope.logOut = true;
         }
 
+        var Item = $resource("/web/api/v1/items");
+        $scope.items = Item.query();
     });

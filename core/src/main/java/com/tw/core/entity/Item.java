@@ -27,8 +27,8 @@ public class Item {
     @Column(name="CREATE_DATE")
     private String create_data;
 
-    @Column(name="BAND")
-    private String band;
+    @Column(name="BRAND")
+    private String brand;
 
     @Column(name="CATEGORY")
     private String category;
@@ -73,12 +73,12 @@ public class Item {
         this.create_data = create_data;
     }
 
-    public String getBand() {
-        return band;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setBand(String band) {
-        this.band = band;
+    public void setBrand(String band) {
+        this.brand = brand;
     }
 
     public String getCategory() {
