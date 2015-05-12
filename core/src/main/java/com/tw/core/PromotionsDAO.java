@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by hgwang on 5/12/15.
@@ -24,5 +25,9 @@ public class PromotionsDAO {
 
     public void create(Promotion promotion){
         sessionFactory.getCurrentSession().save(promotion);
+    }
+
+    public List<Promotion> getAllPromotions() {
+        return sessionFactory.getCurrentSession().createQuery("from Promotion").list();
     }
 }

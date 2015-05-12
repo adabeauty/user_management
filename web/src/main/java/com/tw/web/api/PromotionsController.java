@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by hgwang on 5/12/15.
  */
@@ -24,5 +26,10 @@ public class PromotionsController {
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody Promotion promotion){
         promotionsService.create(promotion);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Promotion> getAllPromotions(){
+        return promotionsService.getAllPromotions();
     }
 }
