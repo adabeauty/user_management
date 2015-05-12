@@ -1,0 +1,2 @@
+INSERT item into (NAME, PRICE, UNIT, CREATE_DATE, BRAND, CATEGORY) values ('雪碧500ml', 3.50, '瓶', '2015-4-15', '可口可乐', '饮料');
+INSERT item into (NAME, PRICE, UNIT, CREATE_DATE, BRAND, CATEGORY) values ('橙汁500ml', 3.00, '瓶', '2015-5-10', '康师傅', '饮料');
