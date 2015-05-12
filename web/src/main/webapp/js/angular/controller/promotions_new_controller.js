@@ -37,7 +37,7 @@ angular.module('userManagement')
 
             var localPromoton = new Promotion($scope.promotion);
             localPromoton.$save().then(function(result){
-                $location.path("/new_promotion");
+                $location.path("/promotion");
             });
         }
     });
