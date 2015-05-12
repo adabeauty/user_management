@@ -26,23 +26,16 @@
         </div>
     </div>
 </div>
+
 <div class="container">
     <form role="form">
         <div class="form-group">
-            <label>Email address</label>
-            <input type="email" class="form-control" placeholder="Enter email" ng-model="user.email">
+            <label>Type</label>
+            <input type="text" class="form-control" placeholder="promotion type" ng-model="promotion.type">
         </div>
         <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
-        </div>
-        <div class="form-group">
-            <label>User name</label>
-            <input type="text" class="form-control" placeholder="User name" ng-model="user.name">
-        </div>
-        <div class="form-group">
-            <label>User age</label>
-            <input type="number" class="form-control" placeholder="User age" ng-model="user.age">
+            <label>Expression</label>
+            <input type="text" class="form-control" placeholder="promotion expression" ng-model="promotion.expression">
         </div>
         <button type="submit" class="btn btn-default" ng-click="create()">Submit</button>
     </form>
