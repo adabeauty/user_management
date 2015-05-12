@@ -28,8 +28,8 @@
 </div>
 <div class="container">
     <div class="form-group input-group ">
-        <button type="button" class="btn btn-primary btn " ng-click="go_to_create_resource()">添加资源</button>
-        <button type="button" class="btn btn-default btn "  ng-click="delete_all_selected_resources()">批量删除</button>
+        <button type="button" class="btn btn-primary btn " ng-click="go_to_create_promotion()">添加优惠</button>
+        <button type="button" class="btn btn-default btn "  ng-click="delete_all_selected_promotions()">批量删除</button>
     </div>
     <div class="form-group input-group ">
         <input type="search" class="form-control" />
@@ -41,22 +41,24 @@
 
 <div class="container">
 
-    <table id="resource-table" class="table table-bordered">
+    <table id="promotion-table" class="table table-bordered">
         <thead>
         <tr>
             <th><input type="checkbox" ng-model="selectedAll" ng-change="select_all_or_select_none()"/></th>
             <th>ID</th>
-            <th>资源名称</th>
+            <th>优惠类型</th>
+            <th>优惠条件</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="resource_line" ng-repeat="resource in resources">
-            <td><input type="checkbox" ng-model="resource.selected"/></td>
-            <td> {{resource.id}}</td>
-            <td> {{resource.name}} </td>
+        <tr class="promotion_line" ng-repeat="promotion in promotions">
+            <td><input type="checkbox" ng-model="promotion.selected"/></td>
+            <td> {{promotion.id}}</td>
+            <td> {{promotion.name}} </td>
+            <td> {{promotion.expression}} </td>
             <td>
-                <button class="btn" ng-click="deleteresource(resource.id)">删除 </button>
+                <button class="btn" ng-click="deletepromotion(promotion.id)">删除 </button>
             </td>
         </tr>
         </tbody>
