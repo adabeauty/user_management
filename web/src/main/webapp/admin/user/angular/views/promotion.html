@@ -55,7 +55,7 @@
         <tr class="promotion_line" ng-repeat="promotion in promotions">
             <td><input type="checkbox" ng-model="promotion.selected"/></td>
             <td> {{promotion.id}}</td>
-            <td> {{promotion.name}} </td>
+            <td> {{promotion.type}} </td>
             <td> {{promotion.expression}} </td>
             <td>
                 <button class="btn" ng-click="deletepromotion(promotion.id)">删除 </button>
