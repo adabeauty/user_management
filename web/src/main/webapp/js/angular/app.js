@@ -32,6 +32,10 @@ angular
                 templateUrl: 'views/resource.html',
                 controller: 'resourcesController'
             })
+            .when('/promotion', {
+                templateUrl: 'views/promotion.html',
+                controller: 'promotionsController'
+            })
             .when('/logIn', {
                 templateUrl: 'views/logIn.html',
                 controller: 'logInController'
