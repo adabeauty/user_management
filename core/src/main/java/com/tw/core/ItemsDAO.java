@@ -1,6 +1,7 @@
 package com.tw.core;
 
 import com.tw.core.entity.Item;
+import com.tw.core.entity.Promotion;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,13 @@ public class ItemsDAO {
     @Transactional
     public List<Item> getAllItems(){
         return sessionFactory.getCurrentSession().createQuery("from Item").list();
+    }
+
+    @Transactional
+    public List<Item> getItemByPromotionAndName(Item item, Promotion promotion){
+
+//        return sessionFactory.getCurrentSession().createQuery("from Item as item where item.name='" + item.getName() + "'").list();
+        return sessionFactory.getCurrentSession().createQuery("from Item").list();
+//        return sessionFactory.getCurrentSession().createQuery("from Item item where '" + promotion.getExpression() + "' and item.name='" + item.getName() + "'").list();
     }
 }
