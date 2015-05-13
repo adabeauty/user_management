@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class receiptController {
         this.itemsService = itemsService;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
 //    public List<Map> getReceipt(@RequestBody List<Item> items) {
     public List<Map> getReceipt() {
 
@@ -42,17 +43,16 @@ public class receiptController {
         return receiptService.getReceipt(items, promotions);
     }
 
-//    @RequestMapping(method = RequestMethod.POST)
-//    //    public List<Map> receipt(@RequestBody List<Item> items) {
-//    public ModelAndView receipt(){
-//        ModelAndView modelAndView = new ModelAndView("receipt");
-//
-//        List<Item> items = itemsService.getAllItems();
-//        List<Promotion> promotions = promotionsService.getAllPromotions();
-//
-//        List<Map> receipt = receiptService.getReceipt(items, promotions);
-//
-//        modelAndView.addObject("receipt", receipt);
-//        return modelAndView;
-//    }
+    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/xml")
+    public ModelAndView receipt(){
+        ModelAndView modelAndView = new ModelAndView("receipt");
+
+        List<Item> items = itemsService.getAllItems();
+        List<Promotion> promotions = promotionsService.getAllPromotions();
+
+        List<Map> receipt = receiptService.getReceipt(items, promotions);
+
+        modelAndView.addObject("receipt", receipt);
+        return modelAndView;
+    }
 }
