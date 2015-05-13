@@ -39,16 +39,12 @@ public class ItemsService {
 
         for(int i=0; i<items.size(); i++){
 
+            List<Promotion> currentPromotions = getPromotionsOfItem(items.get(i), promotions);
+
             Map itemMap = new HashMap();
-            List<Promotion> currentPromotions = new ArrayList<Promotion>();
-            for(int j=0; j<promotions.size(); j++){
-
-                Promotion currentPromotion = getCurrentPromotion(items.get(i), promotions.get(j));
-                currentPromotions.add(currentPromotion);
-            }
-
             itemMap.put("item", items.get(i));
             itemMap.put("promotions", currentPromotions);
+
             receipt.add(itemMap);
         }
 
@@ -72,5 +68,17 @@ public class ItemsService {
         }else {
             return this.nullPromotion;
         }
+    }
+
+    private List<Promotion> getPromotionsOfItem(Item item, List<Promotion> promotions){
+
+        List<Promotion> currentPromotions = new ArrayList<Promotion>();
+        for(int j=0; j<promotions.size(); j++){
+
+            Promotion currentPromotion = getCurrentPromotion(item, promotions.get(j));
+            currentPromotions.add(currentPromotion);
+        }
+
+        return currentPromotions;
     }
 }
