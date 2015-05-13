@@ -24,6 +24,11 @@ public class Promotion {
     public Promotion() {
     }
 
+    public Promotion(String type, String expression) {
+        this.type = type;
+        this.expression = expression;
+    }
+
     public int getId() {
         return id;
     }
