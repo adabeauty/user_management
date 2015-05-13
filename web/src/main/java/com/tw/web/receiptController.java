@@ -41,4 +41,18 @@ public class receiptController {
 
         return receiptService.getReceipt(items, promotions);
     }
+
+//    @RequestMapping(method = RequestMethod.POST)
+//    //    public List<Map> receipt(@RequestBody List<Item> items) {
+//    public ModelAndView receipt(){
+//        ModelAndView modelAndView = new ModelAndView("receipt");
+//
+//        List<Item> items = itemsService.getAllItems();
+//        List<Promotion> promotions = promotionsService.getAllPromotions();
+//
+//        List<Map> receipt = receiptService.getReceipt(items, promotions);
+//
+//        modelAndView.addObject("receipt", receipt);
+//        return modelAndView;
+//    }
 }
