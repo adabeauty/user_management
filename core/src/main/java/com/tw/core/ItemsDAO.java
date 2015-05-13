@@ -31,6 +31,6 @@ public class ItemsDAO {
 
     @Transactional
     public List<Item> getItemByPromotionAndName(Item item, Promotion promotion){
-        return sessionFactory.getCurrentSession().createQuery("from Item item where " + promotion.getExpression() + "and item.name='" + item.getName() + "'").list();
+        return sessionFactory.getCurrentSession().createQuery("from Item item where " + promotion.getExpression() + "and item.id='" + item.getId() + "'").list();
     }
 }
