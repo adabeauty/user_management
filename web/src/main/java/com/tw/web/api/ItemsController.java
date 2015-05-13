@@ -29,11 +29,6 @@ public class ItemsController {
         this.promotionsService = promotionsService;
     }
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    public List<Item> getAllItems(){
-//        return itemsService.getAllItems();
-//    }
-
     @RequestMapping(method = RequestMethod.GET)
     public List<Map> getAllItemsWithPromotion(){
 
