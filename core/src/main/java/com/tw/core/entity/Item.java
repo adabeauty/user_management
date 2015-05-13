@@ -15,6 +15,9 @@ public class Item {
     @GeneratedValue
     private int id;
 
+    @Column(name="BARCODE")
+    private String barcode;
+
     @Column(name="NAME")
     private String name;
 
@@ -39,6 +42,14 @@ public class Item {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
     public String getName() {

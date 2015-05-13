@@ -39,7 +39,12 @@ public class ItemsService {
 
         for(int i=0; i<items.size(); i++){
 
-            List<Promotion> currentPromotions = getPromotionsOfItem(items.get(i), promotions);
+            List<Promotion> currentPromotions = new ArrayList<Promotion>();
+            if(promotions.size() == 0){
+                currentPromotions.add(nullPromotion);
+            }else {
+                currentPromotions = getPromotionsOfItem(items.get(i), promotions);
+            }
 
             Map itemMap = new HashMap();
             itemMap.put("item", items.get(i));

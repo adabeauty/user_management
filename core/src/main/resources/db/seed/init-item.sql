@@ -1,2 +1,3 @@
-INSERT into item (NAME, PRICE, UNIT, CREATE_DATE, BRAND, CATEGORY) values ('雪碧500ml', 3.50, '瓶', '2015-4-15', '可口可乐', '饮料');
-INSERT into item (NAME, PRICE, UNIT, CREATE_DATE, BRAND, CATEGORY) values ('橙汁500ml', 3.00, '瓶', '2015-5-10', '康师傅', '饮料');
+INSERT into item (BARCODE, NAME, PRICE, UNIT, CREATE_DATE, BRAND, CATEGORY) values ('ITEM000001', '羽毛球', 1.00, '个', '2015-5-10', '红双喜', '运动器材');
+INSERT into item (BARCODE, NAME, PRICE, UNIT, CREATE_DATE, BRAND, CATEGORY) values ('ITEM000003', '苹果', 5.50, '斤', '2015-3-10', '云山', '水果');
+INSERT into item (BARCODE, NAME, PRICE, UNIT, CREATE_DATE, BRAND, CATEGORY) values ('ITEM000005', '可口可乐', 3.00, '瓶', '2015-4-15', '可口可乐', '饮料');
