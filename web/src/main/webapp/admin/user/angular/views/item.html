@@ -62,15 +62,16 @@
         <tbody>
         <tr class="item_line" ng-repeat="item in items">
             <td><input type="checkbox" ng-model="item.selected"/></td>
-            <td> {{item.id}}</td>
-            <td> {{item.category}} </td>
-            <td> {{item.brand}} </td>
-            <td> {{item.name}} </td>
-            <td> {{item.price}} </td>
-            <td> {{item.unit}} </td>
-            <td> {{item.createDate}} </td>
-            <td> {{item.promotion}}</td>
-
+            <td> {{item.item.id}}</td>
+            <td> {{item.item.category}} </td>
+            <td> {{item.item.brand}} </td>
+            <td> {{item.item.name}} </td>
+            <td> {{item.item.price}} </td>
+            <td> {{item.item.unit}} </td>
+            <td> {{item.item.createDate}} </td>
+            <td ng-repeat="promotion in item.promotions">
+                <div>{{promotion.type}}</div>
+            </td>
             <td>
                 <button class="btn" ng-click="deleteitem(item.id)">删除 </button>
             </td>
