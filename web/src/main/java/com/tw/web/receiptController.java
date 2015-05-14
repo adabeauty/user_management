@@ -1,9 +1,5 @@
 package com.tw.web;
 
-import com.tw.core.ItemsService;
-import com.tw.core.PromotionsService;
-import com.tw.core.entity.Item;
-import com.tw.core.entity.Promotion;
 import com.tw.core.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,24 +18,11 @@ import java.util.Map;
 @RequestMapping("/receipt")
 public class receiptController {
 
-    private PromotionsService promotionsService;
     private ReceiptService receiptService;
-    private ItemsService itemsService;
 
     @Autowired
-    public receiptController(PromotionsService promotionsService, ReceiptService receiptService, ItemsService itemsService) {
-        this.promotionsService = promotionsService;
+    public receiptController(ReceiptService receiptService) {
         this.receiptService = receiptService;
-        this.itemsService = itemsService;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
-    public List<Map> getItemsWithPromotion() {
-
-        List<Item> items = itemsService.getAllItems();
-        List<Promotion> promotions = promotionsService.getAllPromotions();
-
-        return receiptService.getItemsWithPromotion(items, promotions);
     }
 
     @RequestMapping(method = RequestMethod.GET, headers = "Accept=text/plain", produces="text/plain; charset=UTF-8")
@@ -52,6 +34,7 @@ public class receiptController {
     public ModelAndView getReceiptWithView(HttpServletResponse response){
         ModelAndView modelAndView = new ModelAndView("receipt");
         modelAndView.addObject("receipt", receiptService.getReceipt());
+        modelAndView.addObject("itemInCart", receiptService.getReceipt().get("itemsInCart"));
 
         response.setContentType("application/xml; charset=utf-8");
         return modelAndView;
