@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +48,12 @@ public class receiptController {
         return receiptService.getReceiptWithText();
     }
 
-    @RequestMapping(method = RequestMethod.GET, headers = "Accept=Application/xml", produces="text/plain; charset=UTF-8")
-    public ModelAndView getReceiptWithView(){
+    @RequestMapping(method = RequestMethod.GET, headers = "Accept=Application/xml", produces="Application/xml; charset=UTF-8")
+    public ModelAndView getReceiptWithView(HttpServletResponse response){
         ModelAndView modelAndView = new ModelAndView("receipt");
         modelAndView.addObject("receipt", receiptService.getReceipt());
+
+        response.setContentType("application/xml; charset=utf-8");
         return modelAndView;
     }
 

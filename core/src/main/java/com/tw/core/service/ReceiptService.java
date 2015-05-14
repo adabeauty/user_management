@@ -154,7 +154,7 @@ public class ReceiptService {
         }
         return printCartItems;
     }
-    
+
     @Transactional
     public List<Map> getItemsWithPromotion(List<Item> items, List<Promotion> promotions){
 
