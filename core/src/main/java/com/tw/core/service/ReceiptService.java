@@ -153,4 +153,23 @@ public class ReceiptService {
 
         return title + getTextOfCartItems(cartItems) + this.getPromotions(cartItems) + this.getFooter(cartItems);
     }
+
+    @Transactional
+    public Map getReceiptWithView(){
+
+        Map receiptMap = new HashMap();
+
+        receiptMap.put("name", "购物清单");
+        receiptMap.put("date", this.getDate());
+        receiptMap.put("storeName", "没钱赚商店");
+
+        List<CartItem> cartItems = this.getInputs();
+
+        receiptMap.put("cartItems", cartItems);
+
+        receiptMap.put("price", this.getDataOfFooter(cartItems).get("total"));
+        receiptMap.put("saved", this.getDataOfFooter(cartItems).get("savedMoney"));
+
+        return receiptMap;
+    }
 }

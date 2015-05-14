@@ -47,7 +47,7 @@ public class receiptController {
         return receiptService.getReceiptWithText();
     }
 
-    @RequestMapping(method = RequestMethod.GET, headers = "Accept=Application/xml")
+    @RequestMapping(method = RequestMethod.GET, headers = "Accept=Application/xml", produces="Application/xml; charset=UTF-8")
     public ModelAndView getReceiptWithView(){
         ModelAndView modelAndView = new ModelAndView("receipt");
 
