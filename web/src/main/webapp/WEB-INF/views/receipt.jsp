@@ -1,8 +1,27 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <?xml version="1.0" encoding="utf-8" ?>
-<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<div>
-    <h1>我的jsp</h1>
-</div>
+<Receipt name="购物清单" printDate="2014年08月04日 08:09:05" storeName="没钱赚商店">
+    <ItemsInCart>
+        <Item>
+            <Name>可口可乐</Name>
+            <Count>3</Count>
+            <CountUnit>瓶</CountUnit>
+            <Price>3.00</Price>
+            <CurrencyUnit>元</CurrencyUnit>
+            <SubTotal>6.00</SubTotal>
+        </Item>
+        <!-- 以此类推 -->
+    </ItemsInCart>
+    <Presents>
+        <Item>
+            <Name>可口可乐</Name>
+            <Count>1</Count>
+            <CountUnit>瓶</CountUnit>
+        </Item>
+        <!-- 以此类推 -->
+    </Presents>
+    <Total>
+        <Price>21.00</Price>
+        <Saved>4.00</Saved>
+            <CurrencyUnit>元</CurrencyUnit>
+    </Total>
+</Receipt>
