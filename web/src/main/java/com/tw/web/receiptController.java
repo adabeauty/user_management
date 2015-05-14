@@ -47,17 +47,15 @@ public class receiptController {
         return receiptService.getReceiptWithText();
     }
 
-    @RequestMapping(method = RequestMethod.GET, headers = "Accept=Application/xml", produces="Application/xml; charset=UTF-8")
+    @RequestMapping(method = RequestMethod.GET, headers = "Accept=Application/xml", produces="text/plain; charset=UTF-8")
     public ModelAndView getReceiptWithView(){
         ModelAndView modelAndView = new ModelAndView("receipt");
-
-        List<Item> items = itemsService.getAllItems();
-        List<Promotion> promotions = promotionsService.getAllPromotions();
-
-//        List<Map> receipt = receiptService.getReceipt(items, promotions);
-
-//        modelAndView.addObject("receipt", receipt);
+        modelAndView.addObject("receipt", receiptService.getReceipt());
         return modelAndView;
     }
 
+    @RequestMapping(method = RequestMethod.GET, headers = "Accept=Application/json", produces="Application/json; charset=UTF-8")
+    public Map getReceiptWithJson(){
+        return receiptService.getReceipt();
+    }
 }

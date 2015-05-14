@@ -5,6 +5,8 @@ import com.tw.core.PromotionsDAO;
 import com.tw.core.entity.Item;
 import com.tw.core.entity.Promotion;
 import com.tw.core.model.CartItem;
+import com.tw.core.viewModel.PrintedCartItem;
+import com.tw.core.viewModel.PromotionItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -155,21 +157,56 @@ public class ReceiptService {
     }
 
     @Transactional
-    public Map getReceiptWithView(){
+    public Map getReceipt(){
 
         Map receiptMap = new HashMap();
 
         receiptMap.put("name", "购物清单");
-        receiptMap.put("date", this.getDate());
+        receiptMap.put("printDate", this.getDate());
         receiptMap.put("storeName", "没钱赚商店");
 
         List<CartItem> cartItems = this.getInputs();
 
-        receiptMap.put("cartItems", cartItems);
+        receiptMap.put("itemsInCart", this.getPrintedCartItems(cartItems));
 
-        receiptMap.put("price", this.getDataOfFooter(cartItems).get("total"));
-        receiptMap.put("saved", this.getDataOfFooter(cartItems).get("savedMoney"));
+        receiptMap.put("total", this.getDataOfFooter(cartItems));
+        receiptMap.put("presents", this.getPresents(cartItems));
 
         return receiptMap;
+    }
+
+    private List<PromotionItem> getPresents(List<CartItem> cartItems){
+
+        List<PromotionItem> presents = new ArrayList<PromotionItem>();
+
+        for(int i=0; i<cartItems.size(); i++){
+            if(cartItems.get(i).getPromotions().size() != 0){
+                CartItem cartItem = cartItems.get(i);
+
+                PromotionItem promotionItem = new PromotionItem(
+                        cartItem.getItem().getName(), cartItem.getPromotionNumber(), cartItem.getItem().getUnit()
+                );
+                promotionItem.setName(cartItem.getItem().getName());
+                presents.add(promotionItem);
+            }
+        }
+
+        return presents;
+    }
+
+    private List<PrintedCartItem> getPrintedCartItems(List<CartItem> cartItems){
+
+        List<PrintedCartItem> printCartItems = new ArrayList<PrintedCartItem>();
+
+        for (int i=0; i<cartItems.size(); i++){
+            CartItem cartItem = cartItems.get(i);
+
+            PrintedCartItem printedCartItem = new PrintedCartItem(
+                cartItem.getItem().getName(), cartItem.getNumber(), cartItem.getItem().getUnit(), cartItem.getItem().getPrice(), "元", cartItem.getSubtotal()
+            );
+
+            printCartItems.add(printedCartItem);
+        }
+        return printCartItems;
     }
 }
