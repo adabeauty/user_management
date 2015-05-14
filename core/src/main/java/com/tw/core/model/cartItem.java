@@ -3,23 +3,22 @@ package com.tw.core.model;
 import com.tw.core.entity.Item;
 import com.tw.core.entity.Promotion;
 
-import javax.persistence.Entity;
 import java.util.List;
 
 /**
- * Created by hgwang on 5/13/15.
- */
-@Entity
-public class cartItem {
+* Created by hgwang on 5/13/15.
+*/
+
+public class CartItem {
 
     private Item item;
     private List<Promotion> promotions;
     private int number;
 
-    public cartItem() {
+    public CartItem() {
     }
 
-    public cartItem(Item item, List<Promotion> promotions, int number) {
+    public CartItem(Item item, List<Promotion> promotions, int number) {
         this.item = item;
         this.promotions = promotions;
         this.number = number;
