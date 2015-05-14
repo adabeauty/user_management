@@ -1,27 +1,44 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <?xml version="1.0" encoding="utf-8" ?>
-<Receipt name="购物清单" printDate="2014年08月04日 08:09:05" storeName="没钱赚商店">
-    <ItemsInCart>
-        <Item>
-            <Name>可口可乐</Name>
-            <Count>3</Count>
-            <CountUnit>瓶</CountUnit>
-            <Price>3.00</Price>
-            <CurrencyUnit>元</CurrencyUnit>
-            <SubTotal>6.00</SubTotal>
-        </Item>
-        <!-- 以此类推 -->
-    </ItemsInCart>
-    <Presents>
-        <Item>
-            <Name>可口可乐</Name>
-            <Count>1</Count>
-            <CountUnit>瓶</CountUnit>
-        </Item>
-        <!-- 以此类推 -->
-    </Presents>
-    <Total>
-        <Price>21.00</Price>
-        <Saved>4.00</Saved>
-            <CurrencyUnit>元</CurrencyUnit>
-    </Total>
-</Receipt>
+<%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>List of Users</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="../lib/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <Receipt name="${receipt.name}" printDate="${receipt.printDate}" storeName="${receipt.storeName}">
+
+            <ItemsInCart>
+                <c:forEach var="cartItem" items="${receipt.itemsInCart}">
+                    <Item>
+                        <Name>${cartItem.name}</Name>
+                        <Count>${cartItem.count}</Count>
+                        <CountUnit>${cartItem.countUnit}</CountUnit>
+                        <Price>${cartItem.price}</Price>
+                        <CurrencyUnit>元</CurrencyUnit>
+                        <SubTotal>${cacartItem.subtotal}</SubTotal>
+                    </Item>
+                </c:forEach>
+            </ItemsInCart>
+            <Presents>
+                <c:forEach var="present" items="${receipt.presents}">
+                    <Item>
+                        <Name>${present.name}</Name>
+                        <Count>${present.count}</Count>
+                        <CountUnit>${present.countUnit}</CountUnit>
+                    </Item>
+                </c:forEach>
+            </Presents>
+            <Total>
+                <Price>${receipt.total.total}</Price>
+                <Saved>${receipt.total.saveMoney}</Saved>
+                <CurrencyUnit>元</CurrencyUnit>
+            </Total>
+        </Receipt>
+    </body>
+</html>
