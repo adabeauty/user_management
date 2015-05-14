@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by hgwang on 5/12/15.
@@ -31,8 +29,97 @@ public class ReceiptService {
         this.promotionsDAO = promotionsDAO;
     }
 
+
+    private List<CartItem> getInputs(){
+
+        List<Item> items = itemsDAO.getAllItems();
+        List<Promotion> promotions = promotionsDAO.getAllPromotions();
+
+        List<Map> receipt = this.getItemsWithPromotion(items, promotions);
+
+        List<CartItem> cartItems = new ArrayList<CartItem>();
+        for(int i=0; i<receipt.size(); i++){
+            CartItem cartItem = new CartItem((Item) receipt.get(i).get("item"), (List<Promotion>)receipt.get(i).get("promotions"), 4);
+            cartItems.add(cartItem);
+        }
+
+        return cartItems;
+    }
+
+    private String getDate(){
+        Date date = new Date();
+        SimpleDateFormat timeFormater=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+        return timeFormater.format(date);
+    }
+
+    private String getPromotions(List<CartItem> cartItems){
+
+        String promotions = "----------------------" + "\n"
+                + "挥泪赠送商品：" + "\n";
+
+        for(int i=0; i<cartItems.size(); i++){
+            if(cartItems.get(i).getPromotions().size() != 0){
+                CartItem cartItem = cartItems.get(i);
+                promotions += "名称：" + cartItem.getItem().getName() + "，"
+                        + "数量：" + cartItem.getPromotionNumber() + cartItem.getItem().getUnit() + "\n";
+            }
+        }
+
+        return promotions;
+    }
+
+    private String getFooter(List<CartItem> cartItems){
+        String footer = "----------------------" + "\n"
+                + "总计：" + this.getDataOfFooter(cartItems).get("total") + "（元）" + "\n"
+                + "优惠：" + this.getDataOfFooter(cartItems).get("savedMoney") + "（元）" +"\n"
+                + "**********************";
+
+        return footer;
+    }
+
+    private String getTextOfCartItems(List<CartItem> cartItems){
+
+        String text = "";
+        for (int i=0; i<cartItems.size(); i++){
+            CartItem cartItem = cartItems.get(i);
+            text += "名称：" + cartItem.getItem().getName() + "，"
+                    + "数量：" + cartItem.getNumber() + cartItem.getItem().getUnit() + "，"
+                    + "单价：" + cartItem.getItem().getPrice() + "（元），"
+                    + "小计：" + cartItem.getSubtotal() + "（元）" + "\n";
+        }
+        return text;
+    }
+
+    private Map getDataOfFooter(List<CartItem> cartItems){
+
+        double total = 0;
+        double savedMoney = 0;
+
+        Map map = new HashMap();
+        for (int i=0; i<cartItems.size(); i++){
+            total += cartItems.get(i).getSubtotal();
+            savedMoney += cartItems.get(i).getSavedMoney();
+        }
+
+        map.put("total", total);
+        map.put("savedMoney", savedMoney);
+
+        return map;
+    }
+
+    private boolean hasPromotion(Item item, Promotion promotion){
+
+        List<Item> items = itemsDAO.getItemByPromotionAndName(item, promotion);
+
+        if(items.size() == 0){
+            return false;
+        }
+        return true;
+    }
+
     @Transactional
-    public List<Map> getReceipt(List<Item> items, List<Promotion> promotions){
+    public List<Map> getItemsWithPromotion(List<Item> items, List<Promotion> promotions){
 
         List<Map> receipt = new ArrayList<Map>();
 
@@ -55,29 +142,15 @@ public class ReceiptService {
         return receipt;
     }
 
-    public List<CartItem> getInputs(){
+    @Transactional
+    public String getReceiptWithText(){
 
-        List<Item> items = itemsDAO.getAllItems();
-        List<Promotion> promotions = promotionsDAO.getAllPromotions();
+        String title = "***<没钱赚商店>购物清单***" + "\n"
+                + "打印时间" + this.getDate() + "\n"
+                + "----------------------" + "\n";
 
-        List<Map> receipt = this.getReceipt(items, promotions);
+        List<CartItem> cartItems = this.getInputs();
 
-        List<CartItem> cartItems = new ArrayList<CartItem>();
-        for(int i=0; i<receipt.size(); i++){
-            CartItem cartItem = new CartItem((Item) receipt.get(i).get("item"), (List<Promotion>)receipt.get(i).get("promotions"), 3);
-            cartItems.add(cartItem);
-        }
-
-        return cartItems;
-    }
-
-    private boolean hasPromotion(Item item, Promotion promotion){
-
-        List<Item> items = itemsDAO.getItemByPromotionAndName(item, promotion);
-
-        if(items.size() == 0){
-            return false;
-        }
-        return true;
+        return title + getTextOfCartItems(cartItems) + this.getPromotions(cartItems) + this.getFooter(cartItems);
     }
 }
