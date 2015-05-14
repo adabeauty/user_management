@@ -6,10 +6,12 @@ import com.tw.core.entity.Promotion;
 import java.util.List;
 
 /**
-* Created by hgwang on 5/13/15.
-*/
+ * Created by hgwang on 5/13/15.
+ */
 
 public class CartItem {
+
+    private String BUY_TREE_FREE_ONE = "买三赠一";
 
     private Item item;
     private List<Promotion> promotions;
@@ -49,6 +51,26 @@ public class CartItem {
     }
 
     public double getSubtotal(){
-        return this.number * this.item.getPrice();
+        int actualNumber = this.number-getPromotionNumber();
+        return actualNumber * this.item.getPrice();
+    }
+
+    public double getSavedMoney(){
+        double subtotal = this.number * this.item.getPrice();
+        return subtotal - this.getSubtotal();
+    }
+
+    public int getPromotionNumber(){
+
+        int promotionNumber = 0;
+        for(int i=0; i<this.promotions.size(); i++){
+
+            System.out.println(this.promotions.get(i).getType() + "=========");
+
+            if(this.promotions.get(i).getType().equals(this.BUY_TREE_FREE_ONE)){
+                promotionNumber += this.number/4;
+            }
+        }
+        return promotionNumber;
     }
 }
