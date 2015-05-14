@@ -1,8 +1,10 @@
 package com.tw.core.service;
 
 import com.tw.core.ItemsDAO;
+import com.tw.core.PromotionsDAO;
 import com.tw.core.entity.Item;
 import com.tw.core.entity.Promotion;
+import com.tw.core.model.CartItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +23,12 @@ import java.util.Map;
 public class ReceiptService {
 
     private ItemsDAO itemsDAO;
+    private PromotionsDAO promotionsDAO;
 
     @Autowired
-    public ReceiptService(ItemsDAO itemsDAO) {
+    public ReceiptService(ItemsDAO itemsDAO, PromotionsDAO promotionsDAO) {
         this.itemsDAO = itemsDAO;
+        this.promotionsDAO = promotionsDAO;
     }
 
     @Transactional
@@ -49,6 +53,22 @@ public class ReceiptService {
         }
 
         return receipt;
+    }
+
+    public List<CartItem> getInputs(){
+
+        List<Item> items = itemsDAO.getAllItems();
+        List<Promotion> promotions = promotionsDAO.getAllPromotions();
+
+        List<Map> receipt = this.getReceipt(items, promotions);
+
+        List<CartItem> cartItems = new ArrayList<CartItem>();
+        for(int i=0; i<receipt.size(); i++){
+            CartItem cartItem = new CartItem((Item) receipt.get(i).get("item"), (List<Promotion>)receipt.get(i).get("promotions"), 3);
+            cartItems.add(cartItem);
+        }
+
+        return cartItems;
     }
 
     private boolean hasPromotion(Item item, Promotion promotion){

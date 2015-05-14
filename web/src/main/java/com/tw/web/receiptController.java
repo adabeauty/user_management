@@ -4,6 +4,7 @@ import com.tw.core.ItemsService;
 import com.tw.core.PromotionsService;
 import com.tw.core.entity.Item;
 import com.tw.core.entity.Promotion;
+import com.tw.core.model.CartItem;
 import com.tw.core.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,5 +55,10 @@ public class receiptController {
 
         modelAndView.addObject("receipt", receipt);
         return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<CartItem> getInputs(){
+        return receiptService.getInputs();
     }
 }
