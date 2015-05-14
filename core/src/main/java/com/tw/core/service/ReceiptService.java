@@ -120,6 +120,41 @@ public class ReceiptService {
         return true;
     }
 
+    private List<PromotionItem> getPresents(List<CartItem> cartItems){
+
+        List<PromotionItem> presents = new ArrayList<PromotionItem>();
+
+        for(int i=0; i<cartItems.size(); i++){
+            if(cartItems.get(i).getPromotions().size() != 0){
+                CartItem cartItem = cartItems.get(i);
+
+                PromotionItem promotionItem = new PromotionItem(
+                        cartItem.getItem().getName(), cartItem.getPromotionNumber(), cartItem.getItem().getUnit()
+                );
+                promotionItem.setName(cartItem.getItem().getName());
+                presents.add(promotionItem);
+            }
+        }
+
+        return presents;
+    }
+
+    private List<PrintedCartItem> getPrintedCartItems(List<CartItem> cartItems){
+
+        List<PrintedCartItem> printCartItems = new ArrayList<PrintedCartItem>();
+
+        for (int i=0; i<cartItems.size(); i++){
+            CartItem cartItem = cartItems.get(i);
+
+            PrintedCartItem printedCartItem = new PrintedCartItem(
+                    cartItem.getItem().getName(), cartItem.getNumber(), cartItem.getItem().getUnit(), cartItem.getItem().getPrice(), "元", cartItem.getSubtotal()
+            );
+
+            printCartItems.add(printedCartItem);
+        }
+        return printCartItems;
+    }
+    
     @Transactional
     public List<Map> getItemsWithPromotion(List<Item> items, List<Promotion> promotions){
 
@@ -173,40 +208,5 @@ public class ReceiptService {
         receiptMap.put("presents", this.getPresents(cartItems));
 
         return receiptMap;
-    }
-
-    private List<PromotionItem> getPresents(List<CartItem> cartItems){
-
-        List<PromotionItem> presents = new ArrayList<PromotionItem>();
-
-        for(int i=0; i<cartItems.size(); i++){
-            if(cartItems.get(i).getPromotions().size() != 0){
-                CartItem cartItem = cartItems.get(i);
-
-                PromotionItem promotionItem = new PromotionItem(
-                        cartItem.getItem().getName(), cartItem.getPromotionNumber(), cartItem.getItem().getUnit()
-                );
-                promotionItem.setName(cartItem.getItem().getName());
-                presents.add(promotionItem);
-            }
-        }
-
-        return presents;
-    }
-
-    private List<PrintedCartItem> getPrintedCartItems(List<CartItem> cartItems){
-
-        List<PrintedCartItem> printCartItems = new ArrayList<PrintedCartItem>();
-
-        for (int i=0; i<cartItems.size(); i++){
-            CartItem cartItem = cartItems.get(i);
-
-            PrintedCartItem printedCartItem = new PrintedCartItem(
-                cartItem.getItem().getName(), cartItem.getNumber(), cartItem.getItem().getUnit(), cartItem.getItem().getPrice(), "元", cartItem.getSubtotal()
-            );
-
-            printCartItems.add(printedCartItem);
-        }
-        return printCartItems;
     }
 }
