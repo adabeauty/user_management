@@ -3,6 +3,8 @@ package com.tw.core.entity;
 import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by twer on 7/16/14.
@@ -27,6 +29,13 @@ public class User {
 
     @Column(name = "AGE")
     private int age;
+
+    @ManyToMany
+    @JoinTable(name="user_role",
+            joinColumns = {@JoinColumn(name="USER_ID", nullable=false)},
+            inverseJoinColumns = {@JoinColumn(name="ROLE_ID", nullable=false)}
+    )
+    private Set<Role> roles = new HashSet<Role>();
 
     public User() {
     }
@@ -69,5 +78,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

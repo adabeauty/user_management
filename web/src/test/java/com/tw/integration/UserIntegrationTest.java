@@ -77,7 +77,7 @@ public class UserIntegrationTest {
 
     @Test
     public void when_visit_api_v1_users_id_should_return_ok_and_correct_user() throws Exception {
-        long id = 0;
+        int id = 0;
         when(usersService.findOne(id)).thenReturn(users.get(0));
 
         this.mockMvc.perform(get("/api/v1/users/" + id))

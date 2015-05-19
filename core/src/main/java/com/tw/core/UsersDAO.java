@@ -1,6 +1,5 @@
 package com.tw.core;
 
-import com.sun.webkit.network.URLs;
 import com.tw.core.entity.Role;
 import com.tw.core.entity.Url;
 import com.tw.core.entity.User;

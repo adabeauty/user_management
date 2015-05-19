@@ -1,6 +1,8 @@
 package com.tw.core.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hgwang on 5/10/15.
@@ -18,6 +20,9 @@ public class Role {
     @Column(name="NAME")
     private String name;
 
+    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<User> users = new HashSet<User>();
+
     public int getId() {
         return id;
     }
@@ -32,5 +37,13 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }
